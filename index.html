@@ -1,83 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Spotify - Your favourite music is here</title>
-        <link rel="stylesheet" href="style.css">
-        </head>
-<body>
-    <nav>
-        <ul>
-            <li class="brand"><img src="logo.png" alt="Spotify"> Spotify</li>
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact Us</li>
-            <input type="text" class="Search" placeholder="Search Songs">
-            <div class="library">My Library</div>
-            <div class="login">Log in</div>
-            <div class="signup">Sign up</div>
-             <i class="fa-regular fa-bookmark"></i>
-        </ul>
-    </nav>
-    <div class="container">
-        <h1>Best of NCS - No Copy Right Sounds</h1>
-        <div class="song-list">
-            <div class="songitem1"><span class="songName">Pakistani Number. 01 Song</span>
-                <div class="cover1"></div>
-            </div>
-           <span class="play-icon"><i class="fas fa-play-circle dark-icon"><span class="song-time">05:12</span></i></span>
-         
-            <div class="songitem1"><span class="songName">Pakistani Number. 02 Song</span>
-                <div class="cover2"></div>
-            </div>
-           <span class="play-icon"><i class="fas fa-play-circle dark-icon"><span class="song-time">06:55</span></i></span>
-            <div class="songitem1"><span class="songName">Pakistani Number. 03 Song</span>
-                <div class="cover3"></div>
-            </div>
-           <span class="play-icon"><i class="fas fa-play-circle dark-icon"><span class="song-time">04:33</span></i></span>
-            <div class="songitem1"><span class="songName">Pakistani Number. 04 Song</span>
-                <div class="cover4"></div>
-            </div>
-           <span class="play-icon"><i class="fas fa-play-circle dark-icon"><span class="song-time">03:11</span></i></span>
-            <div class="songitem1"><span class="songName">Pakistani Number. 05 Song</span>
-                <div class="cover5"></div>
-            </div>
-           <span class="play-icon"><i class="fas fa-play-circle dark-icon"><span class="song-time">04:17</span></i></span>
-            <div class="songitem1"><span class="songName">Pakistani Number. 06 Song</span>
-                <div class="cover6"></div>
-            </div>
-           <span class="play-icon"><i class="fas fa-play-circle dark-icon"><span class="song-time">06:14</span></i></span>
-            <div class="songitem1"><span class="songName">Pakistani Number. 07 Song</span>
-                <div class="cover7"></div>
-            </div>
-           <span class="play-icon"><i class="fas fa-play-circle dark-icon"><span class="song-time">05:09</span></i></span>
-            <div class="songitem1"><span class="songName">Pakistani Number. 08 Song</span>
-                <div class="cover8"></div>
-            </div>
-           <span class="play-icon"><i class="fas fa-play-circle dark-icon"><span class="song-time">07:12</span></i></span>
-            <div class="songitem1"><span class="songName">Pakistani Number. 09 Song</span>
-                <div class="cover9"></div>
-            </div>
-           <span class="play-icon"><i class="fas fa-play-circle dark-icon"><span class="song-time">04:22</span></i></span>
-            <div class="songitem1"><span class="songName">Pakistani Number. 10 Song</span>
-                <div class="cover10"></div>
-            </div>
-           <span class="play-icon"><i class="fas fa-play-circle dark-icon"><span class="song-time">06:32</span></i></span>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spotify Clone</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Icons -->
+  <script src="https://kit.fontawesome.com/84b966cd53.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="flex items-center justify-between px-6 py-4 bg-black/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <img src="Logo/logo.png" class="w-10" />
+      <h1 class="text-xl font-bold">Spotify</h1>
+    </div>
+
+    <div class="hidden md:flex items-center gap-6 text-gray-300">
+      <span class="hover:text-white cursor-pointer">Home</span>
+      <span class="hover:text-white cursor-pointer">About</span>
+      <span class="hover:text-white cursor-pointer">Contact</span>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <input type="text" placeholder="Search..." class="hidden md:block px-4 py-2 rounded-full bg-gray-800 text-sm focus:outline-none" />
+      <button class="text-sm hover:underline">Login</button>
+      <button class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-full text-sm font-semibold">Sign up</button>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <div class="max-w-6xl mx-auto px-4 py-8">
+
+    <h2 class="text-2xl font-bold mb-6">Best of NCS</h2>
+
+    <!-- Song List -->
+    <div id="songList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+  </div>
+
+  <!-- Player -->
+  <div class="fixed bottom-0 left-0 w-full bg-black/90 backdrop-blur-md p-4">
+    <div class="max-w-6xl mx-auto flex flex-col gap-3">
+
+      <input type="range" id="progress" class="w-full" />
+
+      <div class="flex items-center justify-between">
+        <div id="currentSong" class="text-sm text-gray-300">No song playing</div>
+
+        <div class="flex items-center gap-6 text-xl">
+          <i id="prev" class="fas fa-backward cursor-pointer"></i>
+          <i id="play" class="fas fa-play-circle text-3xl cursor-pointer"></i>
+          <i id="next" class="fas fa-forward cursor-pointer"></i>
         </div>
-    <div class="song-banner">
+
+        <div class="text-xs text-gray-400">Spotify Clone</div>
+      </div>
+
     </div>
-    <div class="bottom">
-    <input type="range" name="range" id="myProgressBar" min="0" max="100">
-    <div class="icons">
-        <i class="fas fa-3x fa-backward white-icon"></i>  <!-- Backward button -->
-        <i class="fas fa-3x fa-play-circle white-icon" id="masterPlay"></i>  <!-- Play button -->
-        <i class="fas fa-3x fa-forward white-icon"></i>  <!-- Forward button -->
-    </div>
-    <div class="gif"><img src="playing.gif" alt="gif" height="15px" width="50px"></div>
-    </div>
-    <script src="https://kit.fontawesome.com/84b966cd53.js" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+  </div>
+
+<script>
+
+const songs = [
+  { name: "Song 1", file: "songs/1.mp3", cover: "covers/1.jpg" },
+  { name: "Song 2", file: "songs/2.mp3", cover: "covers/2.jpg" },
+  { name: "Song 3", file: "songs/3.mp3", cover: "covers/3.jpg" },
+  { name: "Song 4", file: "songs/4.mp3", cover: "covers/4.jpg" },
+  { name: "Song 5", file: "songs/5.mp3", cover: "covers/5.jpg" }
+];
+
+let index = 0;
+let audio = new Audio();
+
+const songList = document.getElementById("songList");
+const playBtn = document.getElementById("play");
+const progress = document.getElementById("progress");
+const currentSong = document.getElementById("currentSong");
+
+// Render Songs
+songs.forEach((song, i) => {
+  const card = document.createElement("div");
+  card.className = "bg-gray-900 p-4 rounded-xl hover:bg-gray-800 transition cursor-pointer";
+
+  card.innerHTML = `
+    <img src="${song.cover}" class="w-full h-40 object-cover rounded-lg mb-3" />
+    <h3 class="font-semibold">${song.name}</h3>
+    <button class="mt-3 text-green-400"><i class="fas fa-play"></i> Play</button>
+  `;
+
+  card.addEventListener("click", () => playSong(i));
+
+  songList.appendChild(card);
+});
+
+function playSong(i) {
+  index = i;
+  audio.src = songs[i].file;
+  audio.play();
+  playBtn.classList.replace("fa-play-circle", "fa-pause-circle");
+  currentSong.innerText = songs[i].name;
+}
+
+// Play/Pause
+playBtn.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.play();
+    playBtn.classList.replace("fa-play-circle", "fa-pause-circle");
+  } else {
+    audio.pause();
+    playBtn.classList.replace("fa-pause-circle", "fa-play-circle");
+  }
+});
+
+// Next
+next.addEventListener("click", () => {
+  index = (index + 1) % songs.length;
+  playSong(index);
+});
+
+// Prev
+prev.addEventListener("click", () => {
+  index = (index - 1 + songs.length) % songs.length;
+  playSong(index);
+});
+
+// Progress Bar
+audio.addEventListener("timeupdate", () => {
+  progress.value = (audio.currentTime / audio.duration) * 100;
+});
+
+progress.addEventListener("input", () => {
+  audio.currentTime = (progress.value / 100) * audio.duration;
+});
+
+</script>
+
 </body>
 </html>
